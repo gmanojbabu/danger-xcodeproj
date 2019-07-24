@@ -18,3 +18,4 @@ A description of danger-xcodeproj.
 3. Run `bundle exec rake spec` to run the tests.
 4. Use `bundle exec guard` to automatically have tests run as you make changes.
 5. Make your changes.
+# danger-xcodeproj

@@ -23,9 +23,13 @@ module Danger
   class DangerXcodeproj < Plugin
 
     # Xcode project object
-    #
+    # @return  [Project] Xcode project object
     attr_accessor :project
 
+    # Opens Xcode project file using the given path
+    #
+    # @return  [void]
+    #
     def open(path=nil)
       # Fails if Xcode project file path is not provided
       raise "Xcode project file path in not set!" unless !path.nil?

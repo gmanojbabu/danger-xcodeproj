@@ -44,8 +44,6 @@ module Danger
     def targets
       raise "Xcode project is not opened!" if @project.nil?
 
-      puts "Targets:"
-      puts @project.targets
       @project.targets
     end
     
@@ -55,9 +53,7 @@ module Danger
     #
     def target_attributes
       raise "Xcode project is not opened!" if project.nil?
-
-      puts "Project Attributes:"
-      puts @project.root_object.attributes["TargetAttributes"]
+      
       @project.root_object.attributes["TargetAttributes"]
     end
   end

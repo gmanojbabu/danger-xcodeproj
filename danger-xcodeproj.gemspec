@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['gmanojbabu@gmail.com']
   spec.description   = "A Danger pulgin for xcodeproj ruby gem."
   spec.summary       = "A Danger pulgin for xcodeproj ruby gem."
-  spec.homepage      = 'https://github.com/Manoj/danger-xcodeproj'
+  spec.homepage      = 'https://github.com/gmanojbabu/danger-xcodeproj'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)

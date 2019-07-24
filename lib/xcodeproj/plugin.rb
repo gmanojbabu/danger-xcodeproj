@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'xcodeproj'
+
 module Danger
   # This is your plugin class. Any attributes or methods you expose here will
   # be available from within your Dangerfile.
@@ -18,16 +22,39 @@ module Danger
   #
   class DangerXcodeproj < Plugin
 
-    # An attribute that you can read/write from your Dangerfile
+    # Xcode project object
     #
-    # @return   [Array<String>]
-    attr_accessor :my_attribute
+    attr_accessor :project
 
-    # A method that you can call from your Dangerfile
-    # @return   [Array<String>]
+    def open(path=nil)
+      # Fails if Xcode project file path is not provided
+      raise "Xcode project file path in not set!" unless !path.nil?
+
+      @project = Xcodeproj::Project.open(path)
+    end
+
+    # Targets in Xcode Project file
     #
-    def warn_on_mondays
-      warn 'Trying to merge code on a Monday' if Date.today.wday == 1
+    # @return   [Array<Target>]
+    #
+    def targets
+      raise "Xcode project is not opened!" if @project.nil?
+
+      puts "Targets:"
+      puts @project.targets
+      @project.targets
+    end
+    
+    # Targets Attributes in Xcode Project file
+    #
+    # @return   [Array<TargetAttributes>]
+    #
+    def target_attributes
+      raise "Xcode project is not opened!" if project.nil?
+
+      puts "Project Attributes:"
+      puts @project.root_object.attributes["TargetAttributes"]
+      @project.root_object.attributes["TargetAttributes"]
     end
   end
 end

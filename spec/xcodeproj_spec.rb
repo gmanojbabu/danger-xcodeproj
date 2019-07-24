@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path("../spec_helper", __FILE__)
 
 module Danger
@@ -13,32 +15,26 @@ module Danger
       before do
         @dangerfile = testing_dangerfile
         @my_plugin = @dangerfile.xcodeproj
-
-        # mock the PR data
-        # you can then use this, eg. github.pr_author, later in the spec
-        json = File.read(File.dirname(__FILE__) + '/support/fixtures/github_pr.json') # example json: `curl https://api.github.com/repos/danger/danger-plugin-template/pulls/18 > github_pr.json`
-        allow(@my_plugin.github).to receive(:pr_json).and_return(json)
       end
 
-      # Some examples for writing tests
-      # You should replace these with your own.
+      it "Open Xcode project file" do
 
-      it "Warns on a monday" do
-        monday_date = Date.parse("2016-07-11")
-        allow(Date).to receive(:today).and_return monday_date
-
-        @my_plugin.warn_on_mondays
-
-        expect(@dangerfile.status_report[:warnings]).to eq(["Trying to merge code on a Monday"])
+        @my_plugin.open('spec/fixtures/danger-xcodeproj/danger-xcodeproj.xcodeproj')
+        expect(@my_plugin.project).to_not be_nil
       end
 
-      it "Does nothing on a tuesday" do
-        monday_date = Date.parse("2016-07-12")
-        allow(Date).to receive(:today).and_return monday_date
+      it "Targets exists in opened project" do
 
-        @my_plugin.warn_on_mondays
+        @my_plugin.open('spec/fixtures/danger-xcodeproj/danger-xcodeproj.xcodeproj')
+        expect(@my_plugin.project).to_not be_nil
+        expect(@my_plugin.targets).to_not be_nil
+      end
 
-        expect(@dangerfile.status_report[:warnings]).to eq([])
+      it "Target Attributes exists in opened project" do
+
+        @my_plugin.open('spec/fixtures/danger-xcodeproj/danger-xcodeproj.xcodeproj')
+        expect(@my_plugin.project).to_not be_nil
+        expect(@my_plugin.target_attributes).to_not be_nil
       end
 
     end

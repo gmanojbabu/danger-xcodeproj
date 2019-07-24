@@ -1,6 +1,6 @@
 # danger-xcodeproj
 
-A description of danger-xcodeproj.
+A Danger plugin for xcodeproj ruby gem
 
 ## Installation
 
